@@ -1,0 +1,94 @@
+html {
+    font-family: 'Orbitron', Arial, sans-serif;
+    color: black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#calculator {
+    background-color: rgba(81, 78, 78, 255);
+    border-radius: 50px;
+    width: 50vw;
+    height: 65vh;
+    max-width: 400px;
+    max-height: auto;
+    margin: 10vh 0 10vh 0;
+}
+
+.calculatorDisplay {
+    background-color: white;
+    margin: 5%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#result {
+    font-size: 400%;
+    font-family: 'Orbitron', Arial, sans-serif;
+    color: black;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+
+
+#numPad{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2%;
+    margin: 0 5%;
+    width: auto;
+    height: auto;
+}
+
+.numPadButton {
+    font-size: 1.5rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    padding: 15%;
+    height: 100%;
+    width: auto;
+    background-color: rgba(217, 217, 217, 255);
+    border-radius: 15px;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.symbol{
+    font-family: 'Orbitron', Arial, sans-serif;
+    background-color: rgba(138, 125, 255, 255);
+    font-size: 2rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#equalButton{
+    background-color: red;
+}
+
+.numPadButton:hover {
+    background-color: rgba(138, 125, 255, 255);
+    cursor: pointer;
+}
+
+.symbol:hover {
+    background-color: rgba(217, 217, 217, 255);
+    cursor: pointer;
+}
+
+#equalButton:hover {
+    background-color: rgba(138, 125, 255, 255);
+    cursor: pointer;
+}
+
+.numPadButton:active, .symbol:active, #equalButton:active {
+    background-color: rgba(81, 78, 78, 255);
+}
