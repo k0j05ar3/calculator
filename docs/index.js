@@ -146,14 +146,6 @@ equalsButton.addEventListener('click', () => { // Handles equals button click
             resultDisplay.value = '0';
         }, 3000);
     }
-    if (divide && currentInput[1] === 0) {
-        console.log('Division by zero error');
-        resultDisplay.value = 'Zero division error  ';
-        setTimeout(() => {
-            resultDisplay.value = '0';
-        }, 3000);
-        return;
-    }
     updateDisplay();
     console.log('Answer:', answers(currentInput[0], currentInput[1]));
     const answer = answers(currentInput[0], currentInput[1]);
@@ -218,6 +210,11 @@ const answers = (operand1, operand2) => {
         console.log('Performing multiplication:', operand1, '*', operand2);
         return operand1 * operand2;
     } else if (divide) {
+        if (operand2 === 0) {
+            console.log('Division by zero error');
+            resultDisplay.value = 'Division Error';
+            return 'Division Error';
+        }
         console.log('Performing division:', operand1, '/', operand2);
         return operand1 / operand2;
     } else {
