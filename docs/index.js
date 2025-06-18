@@ -24,7 +24,6 @@ let floatNumber = 0;
 
 // Setting up
 window.onload = function(){
-    resultDisplay.value = 'Loaded';
     console.log('Calculator loaded');
 }
 
@@ -35,11 +34,13 @@ setTimeout(() => {
 
 const clearDisplay = () => { // Clears display
     resultDisplay.value = '';
-    currentInput = [];
     console.log('Display cleared');
 }
 
 const updateDisplay = () => { // Function takes display value and pushes it to currentInput array
+    if (resultDisplay.value === '' || currentInput.length >= 2) {
+        return;
+    }
     floatNumber = Number(resultDisplay.value);
     console.log('Updating display with value:', floatNumber);
     if (typeof floatNumber === 'number' && !isNaN(floatNumber)) {
@@ -51,6 +52,7 @@ const updateDisplay = () => { // Function takes display value and pushes it to c
             resultDisplay.value = '0';
         }, 3000);
     }
+    console.log('Current input updated:', currentInput);
 }
 // Adding event listeners to buttons
 oneButton.addEventListener('click', () => { // Adds 1 to display
@@ -134,15 +136,99 @@ decimalButton.addEventListener('click', () => { // Adds decimal point to display
         console.log('Decimal already present');
     }
 })
+
 equalsButton.addEventListener('click', () => { // Handles equals button click
     console.log('Equals button clicked');
-    if (resultDisplay.value === '0' && currentInput.length == 0){
+    if (resultDisplay.value === '0' && currentInput.length < 1){
         console.log('No operation to perform');
         resultDisplay.value = 'Need input';
         setTimeout(() => {
             resultDisplay.value = '0';
         }, 3000);
     }
+    if (divide && currentInput[1] === 0) {
+        console.log('Division by zero error');
+        resultDisplay.value = 'Zero division error  ';
+        setTimeout(() => {
+            resultDisplay.value = '0';
+        }, 3000);
+        return;
+    }
     updateDisplay();
-    console.log('Current input:', currentInput);
+    console.log('Answer:', answers(currentInput[0], currentInput[1]));
+    const answer = answers(currentInput[0], currentInput[1]);
+    if (answer === undefined || answer === null || isNaN(answer)) {
+        resultDisplay.value = 'Error';
+    } else {
+        resultDisplay.value = answers(currentInput[0], currentInput[1]);
+        resetOperations(); // Reset operations after calculation
+    }
+    console.log(resultDisplay.value);
+    currentInput = []; // Clear current input after calculation
+    console.log('Current input cleared:', currentInput);
 })
+
+
+let plus = false;
+let minus = false;
+let multiply = false;
+let divide = false;
+
+plusButton.addEventListener('click', () => { // Handles plus button click
+    console.log(resultDisplay.value)
+    updateDisplay();
+    console.log('Plus button clicked');
+    console.log('Current input:', currentInput);
+    plus = true;
+    clearDisplay();
+})
+minusButton.addEventListener('click', () => { // Handles minus button click
+    console.log(resultDisplay.value)
+    updateDisplay();
+    console.log('Minus button clicked');
+    console.log('Current input:', currentInput);
+    minus = true;
+    clearDisplay();
+})
+multiplyButton.addEventListener('click', () => { // Handles multiply button click
+    console.log(resultDisplay.value)
+    updateDisplay();
+    console.log('Multiply button clicked');
+    console.log('Current input:', currentInput);
+    multiply = true;
+    clearDisplay();
+})
+divideButton.addEventListener('click', () => { // Handles divide button click
+    console.log(resultDisplay.value)
+    updateDisplay();
+    console.log('Divide button clicked');
+    console.log('Current input:', currentInput);
+    divide = true;
+    clearDisplay();
+})
+
+const answers = (operand1, operand2) => {
+    if (plus) {
+        console.log('Performing addition:', operand1, '+', operand2);
+        return operand1 + operand2;
+    } else if (minus) {
+        console.log('Performing subtraction:', operand1, '-', operand2);
+        return operand1 - operand2;
+    } else if (multiply) {;
+        console.log('Performing multiplication:', operand1, '*', operand2);
+        return operand1 * operand2;
+    } else if (divide) {
+        console.log('Performing division:', operand1, '/', operand2);
+        return operand1 / operand2;
+    } else {
+        console.log('No operation selected');
+        return null;
+    }
+}
+function resetOperations() {
+    plus = false;
+    minus = false;
+    multiply = false;
+    divide = false;
+    console.log('Operations reset');
+}
