@@ -13,11 +13,12 @@
         <title>Simple Calculator</title>
         <link rel="icon" href="media/calculator.png" type="image/x-png">
         <link rel="stylesheet" href="index.css">
+        <script src="index.js" defer></script>
     </head>
     <body>
         <div class="calculatorItems" id="calculator">
             <section id="display" class="calculatorDisplay">
-                <input type="text" id="result" class="calculatorDisplay" disabled value="0">
+                <input type="text" id="result" class="calculatorDisplay" disabled value="0" scrollable="true">
             </section>
             <section class="calculatorItems" id="numPad">
                <button class="calculatorItems numPadButton firstRow" id="7button">7</button> 
@@ -36,6 +37,7 @@
                 <button class="calculatorItems numPadButton lastRow" id="decimalButton">&#xb7</button>
                 <button class="calculatorItems numPadButton lastRow" id="equalButton">=</button>
                 <button class="calculatorItems numPadButton symbol" id="divideButton">&#xF7</button>
+            </section>
         </div>
     </body>
 </html>
